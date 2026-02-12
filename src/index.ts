@@ -47,12 +47,6 @@ const human = new Human({
     gesture: { enabled: false },
 });
 
-// Initialize Human library
-await human.tf.ready();
-console.log('Human version:', human.version, 'TensorFlow:', human.tf.version_core);
-await human.load();
-console.log('Human library loaded successfully');
-
 const app = new Elysia()
     .get('/', () => ({
         message: 'Face Liveness Detection API',
@@ -125,6 +119,12 @@ const app = new Elysia()
     .listen({
         port: Bun.env.PORT || 3000,
         hostname: '127.0.0.1',
+    }, async () => {
+        // Initialize Human library
+        await human.tf.ready();
+        console.log('Human version:', human.version, 'TensorFlow:', human.tf.version_core);
+        await human.load();
+        console.log('Human library loaded successfully');
     });
 
 console.log(`🚀 Server is running at http://${app.server?.hostname}:${app.server?.port}`);
