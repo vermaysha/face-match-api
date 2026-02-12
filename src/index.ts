@@ -90,7 +90,7 @@ const app = new Elysia()
             // Detect faces
             const result = await human.detect(tensor);
             
-            const liveCount = result.face.filter((face) => face.live && face.live >= 0.9).length;
+            const liveCount = result.face.filter((face) => face.live && face.live >= 0.98).length;
             const totalFaces = result.face.length;
 
             // Clean up
